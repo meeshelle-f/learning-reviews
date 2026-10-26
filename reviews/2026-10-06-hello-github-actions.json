@@ -1,0 +1,11 @@
+{
+  "title": "Hello GitHub Actions",
+  "type": "course",
+  "url": "https://github.com/skills/hello-github-actions",
+  "creator": "GitHub Skills",
+  "rating": 4,
+  "reviewer": "The course team",
+  "date": "2026-10-06",
+  "review": "A short, free course that runs inside your own copy of a repository: finishing each step triggers a workflow that checks your work and shows the next instructions. A good first taste of workflows, jobs and steps before a bigger project.",
+  "tags": ["github-actions"]
+}

@@ -1,0 +1,13 @@
+# Optional: Dependabot opens a pull request when a newer version of a tool or an action comes out.
+# Copy it into place with:  cp tutorial/dependabot.yml .github/dependabot.yml
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

@@ -1,0 +1,11 @@
+{
+  "title": "Replace with the title of what you learned from",
+  "type": "article",
+  "url": "https://example.com/replace-with-the-real-link",
+  "creator": "Replace with the author, channel or teacher",
+  "rating": 5,
+  "reviewer": "Replace with your name",
+  "date": "YYYY-MM-DD",
+  "review": "Replace with two or three sentences: what it taught you, and who should read or watch it.",
+  "tags": ["github-actions"]
+}

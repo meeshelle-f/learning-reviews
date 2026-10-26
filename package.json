@@ -1,0 +1,22 @@
+{
+  "name": "learning-reviews",
+  "version": "1.0.0",
+  "description": "A small website of reviews for the articles, books, videos, courses and podcasts you learned from. Tested, built and deployed by GitHub Actions.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "node src/check.js",
+    "lint": "eslint .",
+    "test": "node --test --test-reporter=spec",
+    "build": "node src/build.js",
+    "start": "node src/build.js && node scripts/serve.js"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0"
+  }
+}

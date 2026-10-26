@@ -1,0 +1,11 @@
+{
+  "title": "Continuous Integration",
+  "type": "article",
+  "url": "https://martinfowler.com/articles/continuousIntegration.html",
+  "creator": "Martin Fowler",
+  "rating": 5,
+  "reviewer": "The course team",
+  "date": "2026-09-15",
+  "review": "Explains continuous integration as a team habit, not a tool: everyone pushes to the mainline every day, every push triggers a self-testing build, and a broken build is fixed immediately. The section on keeping the build fast changed how I think about test suites.",
+  "tags": ["ci-cd", "testing"]
+}

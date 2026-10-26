@@ -1,0 +1,119 @@
+# Tutorial stage 4 (optional): everything in stage 3, plus a copy of the site on Amazon S3.
+# Copy it into place with:  cp tutorial/pipeline-4-aws.yml .github/workflows/pipeline.yml
+# The new deploy-aws job runs only after you add the repository variables AWS_ROLE_ARN, AWS_REGION and S3_BUCKET.
+name: Pipeline
+
+# When it runs: a push to main, every pull request, and the "Run workflow" button.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# The token GitHub gives these jobs can only read the code.
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install the tools
+        run: npm ci
+
+      - name: Check the review files
+        run: npm run check
+
+      - name: Lint the code
+        run: npm run lint
+
+      - name: Run the unit tests
+        run: npm test
+
+  build:
+    # Starts only after the test job has passed.
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Build the site
+        run: npm run build
+
+      - name: Package the site for GitHub Pages
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    # Starts only after the build job has passed, and only for main:
+    # a pull request is tested and built, but never published.
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    # This job, and only this job, may publish to GitHub Pages.
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # One deployment at a time; a newer one waits instead of cancelling one that is half done.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - name: Publish the site
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+  deploy-aws:
+    # Runs beside the GitHub Pages deploy, only for main, and only once AWS is set up.
+    needs: build
+    if: github.ref == 'refs/heads/main' && vars.AWS_ROLE_ARN != ''
+    runs-on: ubuntu-latest
+    # id-token: write lets the job ask GitHub for a short-lived sign-in token that AWS checks.
+    # No AWS password or access key is stored anywhere in GitHub.
+    permissions:
+      contents: read
+      id-token: write
+    concurrency:
+      group: aws
+      cancel-in-progress: false
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Build the site
+        run: npm run build
+
+      - name: Sign in to AWS
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Upload the site to S3
+        env:
+          BUCKET: ${{ vars.S3_BUCKET }}
+        run: aws s3 sync dist "s3://$BUCKET" --delete

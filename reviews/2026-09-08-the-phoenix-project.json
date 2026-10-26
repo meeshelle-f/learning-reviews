@@ -1,0 +1,11 @@
+{
+  "title": "The Phoenix Project",
+  "type": "book",
+  "url": "https://itrevolution.com/product/the-phoenix-project/",
+  "creator": "Gene Kim, Kevin Behr and George Spafford",
+  "rating": 5,
+  "reviewer": "The course team",
+  "date": "2026-09-08",
+  "review": "A novel about Bill, a newly promoted IT operations manager who has 90 days to rescue a late, over-budget project. It made the Three Ways of DevOps (flow, feedback, and continual learning) concrete for me: each chapter shows a real problem, like unplanned work or one overloaded engineer, before naming the idea that fixes it.",
+  "tags": ["devops", "culture"]
+}

@@ -1,0 +1,11 @@
+{
+  "title": "Understanding GitHub Actions",
+  "type": "article",
+  "url": "https://docs.github.com/en/actions/get-started/understand-github-actions",
+  "creator": "GitHub Docs",
+  "rating": 5,
+  "reviewer": "The course team",
+  "date": "2026-10-13",
+  "review": "The official overview of workflows, events, jobs, actions and runners, with a diagram of how they fit together. I keep coming back to it as a glossary whenever a workflow file confuses me.",
+  "tags": ["github-actions", "docs"]
+}

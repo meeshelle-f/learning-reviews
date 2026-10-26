@@ -1,0 +1,61 @@
+# Tutorial stage 2: test, then build the site and keep it as an artifact.
+# Copy it into place with:  cp tutorial/pipeline-2-build.yml .github/workflows/pipeline.yml
+name: Pipeline
+
+# When it runs: a push to main, every pull request, and the "Run workflow" button.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# The token GitHub gives these jobs can only read the code.
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install the tools
+        run: npm ci
+
+      - name: Check the review files
+        run: npm run check
+
+      - name: Lint the code
+        run: npm run lint
+
+      - name: Run the unit tests
+        run: npm test
+
+  build:
+    # Starts only after the test job has passed.
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Build the site
+        run: npm run build
+
+      - name: Save the site as an artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: site
+          path: dist

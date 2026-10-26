@@ -1,0 +1,11 @@
+{
+  "title": "GitHub Actions Tutorial - Basic Concepts and CI/CD Pipeline with Docker",
+  "type": "video",
+  "url": "https://www.youtube.com/watch?v=R8_veQiYBjI",
+  "creator": "TechWorld with Nana",
+  "rating": 4,
+  "reviewer": "The course team",
+  "date": "2026-09-29",
+  "review": "Explains workflows, events, jobs and runners with clear diagrams, then builds a pipeline that creates and pushes a Docker image. Some screens look older than today's GitHub, but every concept still applies.",
+  "tags": ["github-actions", "docker"]
+}
