@@ -15,8 +15,8 @@
     "start": "node src/build.js && node scripts/serve.js"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "eslint": "^10.13.0",
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
     "globals": "^17.13.0"
   }
 }
