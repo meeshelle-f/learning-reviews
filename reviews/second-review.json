@@ -1,0 +1,11 @@
+{
+  "title": "What is Docker?",
+  "type": "article",
+  "url": "https://docs.docker.com/get-started/docker-overview",
+  "creator": "Docker Docs",
+  "rating": 5,
+  "reviewer": "Michelle",
+  "date": "2026-11-07",
+  "review": "Explains images, containers, registries and the Docker daemon with one clear diagram. It made the rest of the Docker course much easier to follow.",
+  "tags": ["docker"]
+}
