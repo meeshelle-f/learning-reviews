@@ -1,5 +1,5 @@
-# Tutorial stage 2: test, then build the site and keep it as an artifact.
-# Copy it into place with:  cp tutorial/pipeline-2-build.yml .github/workflows/pipeline.yml
+# Tutorial stage 3: test, build, and deploy the site to GitHub Pages.
+# Copy it into place with:  cp tutorial/pipeline-3-deploy.yml .github/workflows/pipeline.yml
 name: Pipeline
 
 # When it runs: a push to main, every pull request, and the "Run workflow" button.
@@ -54,8 +54,29 @@ jobs:
       - name: Build the site
         run: npm run build
 
-      - name: Save the site as an artifact
-        uses: actions/upload-artifact@v7
+      - name: Package the site for GitHub Pages
+        uses: actions/upload-pages-artifact@v5
         with:
-          name: site
           path: dist
+
+  deploy:
+    # Starts only after the build job has passed, and only for main:
+    # a pull request is tested and built, but never published.
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    # This job, and only this job, may publish to GitHub Pages.
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # One deployment at a time; a newer one waits instead of cancelling one that is half done.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - name: Publish the site
+        id: deployment
+        uses: actions/deploy-pages@v5
