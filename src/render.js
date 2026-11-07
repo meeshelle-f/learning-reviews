@@ -11,7 +11,7 @@ export function escapeHtml(value) {
 }
 
 export function stars(rating) {
-  return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+  return '★'.repeat(rating) + '☆'.repeat(4 - rating);
 }
 
 // "2026-09-08" -> "Sep 8, 2026"
