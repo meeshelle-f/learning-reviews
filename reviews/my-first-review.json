@@ -1,11 +1,11 @@
 {
-  "title": "Replace with the title of what you learned from",
+  "title": "Quickstart for GitHub Actions",
   "type": "article",
-  "url": "https://example.com/replace-with-the-real-link",
-  "creator": "Replace with the author, channel or teacher",
+  "url": "https://docs.github.com/en/actions/get-started/quickstart",
+  "creator": "GitHub Docs",
   "rating": 5,
-  "reviewer": "Replace with your name",
-  "date": "YYYY-MM-DD",
-  "review": "Replace with two or three sentences: what it taught you, and who should read or watch it.",
+  "reviewer": "Michelle",
+  "date": "2026-11-07",
+  "review": "Build a first workflow and show where to find its run and its log.",
   "tags": ["github-actions"]
 }
