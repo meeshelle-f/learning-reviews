@@ -1,5 +1,7 @@
 # Learning Reviews
 
+[![Pipeline](https://github.com/meeshelle-f/learning-reviews/actions/workflows/pipeline.yml/badge.svg)](https://github.com/meeshelle-f/learning-reviews/actions/workflows/pipeline.yml)
+
 A small website where you review the articles, books, videos, courses and podcasts you learned from.
 It is the starter project for the **GitHub Actions project tutorial**: you build a real pipeline that
 **tests** every change, **builds** the site and **deploys** it to GitHub Pages, one step at a time.
